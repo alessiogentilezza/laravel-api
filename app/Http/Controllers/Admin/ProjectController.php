@@ -115,6 +115,18 @@ class ProjectController extends Controller
 
         $validated_data['slug'] = Str::slug($request->title, '-');
 
+        if ($request->hasFile('cover_image')) {
+
+            if ($project->cover_image) {
+                Storage::delete($project->cover_image);
+            }
+
+            $img_path = Storage::put('cover', $request->cover_image);
+            $validated_data['cover_image'] = $img_path;
+
+        }
+
+
         $project->technologies()->sync($request->technologies);
 
         $project->update($validated_data);
