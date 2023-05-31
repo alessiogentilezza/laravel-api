@@ -5,9 +5,12 @@
 
 @section('content')
     <div class="card m-3" style="width: 18rem;">
-
-        <img src="{{ asset('storage/' . $project->cover_image) }}" class="card-img-top p-3" alt="...">
-
+        @if ($project->cover_image)
+            <img src="{{ asset('storage/' . $project->cover_image) }}" class="card-img-top p-3" alt="...">
+        @else
+            <h3 class="card-img-top p-3 text-danger">NESSUNA IMMAGINE DISPONIBILE</h3>
+            <i class="fa-solid fa-camera-slash"></i>
+        @endif
         <div class="card-body">
             <h5 class="card-title">{{ $project->title }}</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
