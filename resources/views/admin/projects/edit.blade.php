@@ -32,14 +32,13 @@
         </div>
         <div class="mb-3">
 
+            <label for="cover_image" class="form-label">Seleziona nuova immagine di copertina</label>
             @if ($project->cover_image)
-                <div class="card m-3" style="width: 18rem;"> <img class="card-img-top p-3" style="width: 18rem;"
-                        src="{{ asset('storage/' . $project->cover_image) }}" alt="{{ $project->title }}" />
+                <div class="card m-3" style="width: 18rem;">
+                    <img class="card-img-top p-3" style="width: 18rem;" src="{{ asset('storage/' . $project->cover_image) }}" alt="{{ $project->title }}" />
                     <div id="btn-delete" class="btn btn-danger m-3">Rimuovi l'immagine</div>
                 </div>
             @endif
-            <label for="cover_image" class="form-label">Seleziona nuova immagine di copertina</label>
-
             <input type="file" class="form-control @error('cover_image') is-invalid @enderror " id="cover_image"
                 name="cover_image">
 
