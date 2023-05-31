@@ -32,12 +32,15 @@ Route::middleware(['auth', 'verified'])
         Route::resource('projects', ProjectController::class)
             ->parameters(['projects' => 'project:slug']);
 
-            Route::resource('types', TypeController::class)
+        Route::resource('types', TypeController::class)
             ->parameters(['types' => 'type:slug'])->only(['index']);
 
-            Route::resource('technologies', TechnologyController::class)
+        Route::resource('technologies', TechnologyController::class)
             ->parameters(['technologies' => 'technology:slug'])->only(['index']);
     });
+
+Route::delete('projects/{slug}/deleteImage', [ProjectController::class, 'deleteImage'])->name('projects.deleteImage');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

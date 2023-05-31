@@ -3,7 +3,8 @@
 @section('page-title', "Modifica: $project->title")
 
 @section('content')
-    <form method="POST" action="{{ route('admin.projects.update', ['project' => $project->slug]) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.projects.update', ['project' => $project->slug]) }}"
+        enctype="multipart/form-data">
 
         @csrf
         @method('PUT')
@@ -29,13 +30,27 @@
                 </div>
             @enderror
         </div>
-
         <div class="mb-3">
 
-            <label for="cover_image" class="form-label">Seleziona immagine di copertina</label>
-            <input type="file" class="form-control @error('cover_image') is-invalid @enderror " id="cover_image" name="cover_image">
+            @if ($project->cover_image)
+                <div class="card m-3" style="width: 18rem;"> <img class="card-img-top p-3" style="width: 18rem;"
+                        src="{{ asset('storage/' . $project->cover_image) }}" alt="{{ $project->title }}" />
+                    <div id="btn-delete" class="btn btn-danger m-3">Rimuovi l'immagine</div>
+                </div>
+            @endif
+            <label for="cover_image" class="form-label">Seleziona nuova immagine di copertina</label>
 
-                @error('cover_image')
+            <input type="file" class="form-control @error('cover_image') is-invalid @enderror " id="cover_image"
+                name="cover_image">
+
+            {{-- <div class="d-flex">
+                <input type="file" class="form-control @error('cover_image') is-invalid @enderror " id="cover_image"
+                    name="cover_image">
+
+                <div id="btn-delete" class="ms-3 btn btn-danger">X</div>
+            </div> --}}
+
+            @error('cover_image')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
@@ -93,7 +108,14 @@
         </div>
 
         <button type="submit" class="btn btn-success">Salva</button>
-        <button type="reset" class="btn btn-danger">Cancella</button>
+        <button type="reset" class="btn btn-danger">Svuota form</button>
 
     </form>
+
+    <form id="form-delete" action="{{ route('projects.deleteImage', ['slug' => $project->slug]) }}" method="POST">
+        @csrf
+        @method('DELETE')
+
+    </form>
+
 @endsection
