@@ -10,8 +10,8 @@
                 @if ($project->cover_image)
                     <img src="{{ asset('storage/' . $project->cover_image) }}" class="card-img-top p-3" alt="...">
                 @else
-                    <h3 class="card-img-top p-3 text-danger">NESSUNA IMMAGINE DISPONIBILE</h3>
-                    <i class="fa-solid fa-camera-slash"></i>
+                    <h3 class="card-img-top p-3 text-danger text-center">NESSUNA IMMAGINE DISPONIBILE</h3>
+                    <i class="fa-solid fa-eye-slash fs-1 text-danger text-center"></i>
                 @endif
                 <div class="card-body">
                     <h5 class="card-title">{{ $project->title }}</h5>
