@@ -16,7 +16,7 @@ class LeadController extends Controller
     {
 
         $data = $request->all();
-
+/*
         $validator = Validator::make(
             $data,
             [
@@ -34,7 +34,7 @@ class LeadController extends Controller
                 ]
             );
         }
-
+*/
         $lead = new Lead();
         $lead->fill($data);
         $lead->save();
